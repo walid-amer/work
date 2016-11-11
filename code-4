@@ -1,0 +1,72 @@
+
+package tiket;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author walid-amer
+ */
+public class Tiket extends Thread {
+    
+    private static int tick=0;
+        private String _name ;
+    public Tiket(String name)
+    {_name=name;
+    
+    }
+public static int getvaleur()
+{return tick;}
+
+
+public void run() {
+    
+while (tick < 40000000) {
+tick++; // tick est un entier initialisé à 0 
+// tick représente le nombre de millisecondes écoulées depuis 
+// le début de l'exécution du CoureurEgoiste 
+if ((tick % 50000) == 0) {
+System.out.println("Thread #" + Thread.currentThread().getName()+
+" tick = " + tick);
+    
+
+     } 
+
+}
+System.out.println("thread name : "+Thread.currentThread().getName());
+System.out.println("thread priority : "+Thread.currentThread().getPriority());
+ 
+ 
+
+}
+
+    public static void main(String[] args) {
+        // TODO code application logic here
+    
+    System.out.println("VAleure"+Tiket.getvaleur());
+    Tiket thr1 = new Tiket("processus1");
+    Tiket thr2 = new Tiket("processus2");
+    Tiket thr3 = new Tiket("processus2");
+    thr1.start();
+    
+    thr2.start();
+    thr3.start();
+    System.out.println("the number of threads is:"+Thread.activeCount());
+   
+    try
+    {
+      thr1.join();
+       thr2.join();
+       thr3.join();
+       
+    }
+    catch (Exception e) {System.out.println(e);}
+    
+    System.out.println("fin de P2c"); 
+
+    System.exit(0); 
+    
+ 
+}
+}
